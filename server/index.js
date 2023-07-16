@@ -24,10 +24,7 @@ app.use(cookieParser());
 
 // jo b frontend se request aayengi unko handle krne k liye cors ka use krte hai 
 app.use(
-    cors({
-        origin:"http://localhost:3000",
-        credentials:true,
-    })
+    cors()
 )
 
 app.use(
