@@ -27,14 +27,17 @@ import FullCourseDetails from "./pages/FullCourseDetails";
 import ViewCourse from "./pages/ViewCourse";
 import VideoDetails from "./components/core/ViewCourse/VideoDetails";
 import Instructor from "./components/core/Dashboard/InstructorDashboard/Instructor";
-// import SimpleBottomNavigation from "./components/common/BottomNavbar";
+import SimpleBottomNavigation from "./components/common/BottomNavbar";
+import More from "./pages/More";
+
 
 function App() {
   const { user } = useSelector((state) => state.profile)
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
       <Navbar />
-      {/* <SimpleBottomNavigation /> */}
+      <SimpleBottomNavigation />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/catalog/:catalogName" element={<Catalog />} />
@@ -96,14 +99,21 @@ function App() {
           element={
             <Contact />
           }
-        /> 
+        />
+
+        <Route
+          path="/more"
+          element={
+            <More />
+          }
+        />
 
         <Route
           path="/courses/:courseId"
           element={
             <FullCourseDetails />
           }
-        /> 
+        />
 
         <Route
           element={
@@ -114,10 +124,10 @@ function App() {
         >
           <Route path="dashboard/my-profile" element={<MyProfile />} />
           <Route path="dashboard/settings" element={<Settings />} />
-          
+
 
           {
-            user?.accountType === ACCOUNT_TYPE.STUDENT  && (
+            user?.accountType === ACCOUNT_TYPE.STUDENT && (
               <>
                 <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
                 <Route path="dashboard/cart" element={<Cart />} />
@@ -126,7 +136,7 @@ function App() {
           }
 
           {
-            user?.accountType === ACCOUNT_TYPE.INSTRUCTOR  && (
+            user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
               <>
                 <Route path="dashboard/add-course" element={<AddCourse />} />
                 <Route path="dashboard/my-courses" element={<MyCourses />} />
@@ -146,7 +156,7 @@ function App() {
           {
             user?.accountType === ACCOUNT_TYPE.STUDENT && (
               <>
-                <Route 
+                <Route
                   path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
                   element={<VideoDetails />}
                 />
