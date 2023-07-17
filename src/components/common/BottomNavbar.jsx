@@ -45,7 +45,7 @@ const BottomNavbar = () => {
         <div className='block md:hidden lg:hidden '>
             <div className='flex h-14 items-center  justify-between  w-full top-0 z-10 bg-richblack-900 p-5 text-richblack-5 '>
                 <Link to="/">
-                    <img src={Logo} alt="" width={160} height={42} loading='lazy' />
+                    <img src={Logo} alt="" width={130} height={42} loading='lazy' />
                 </Link>
 
                 <div className='flex gap-x-4 items-center '>
