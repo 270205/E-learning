@@ -11,6 +11,6 @@ function Signup() {
       formType="signup"
     />
   )
-}
+} 
 
-export default Signup
+export default Signup 

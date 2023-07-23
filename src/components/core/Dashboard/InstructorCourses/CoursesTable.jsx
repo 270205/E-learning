@@ -38,22 +38,24 @@ export default function CoursesTable({ courses, setCourses }) {
   }
 
   // console.log("All Course ", courses)
+  const {darkMode} = useSelector((state) => state.mode);
+
 
   return (
     <>
-      <Table className="rounded-xl border border-richblack-800 ">
+      <Table className={`rounded-xl border ${darkMode ? " border-richblack-800" : "border-richblack-800 shadow-[0_3px_10px_rgb(0,0,0,0.2)]"}`}>
         <Thead>
           <Tr className="flex gap-x-10 rounded-t-md border-b border-b-richblack-800 px-6 py-2">
-            <Th className="flex-1 text-left text-sm font-medium uppercase text-richblack-100">
+            <Th className={`flex-1 text-left text-sm font-medium uppercase ${darkMode ? "text-richblack-100" : "text-richblack-600"}`}>
               Courses
             </Th>
-            <Th className="text-left text-sm font-medium uppercase text-richblack-100">
+            <Th className={`text-left text-sm font-medium uppercase ${darkMode ? "text-richblack-100" : "text-richblack-600"}`}>
               Duration
             </Th>
-            <Th className="text-left text-sm font-medium uppercase text-richblack-100">
+            <Th className={`text-left text-sm font-medium uppercase ${darkMode ? "text-richblack-100" : "text-richblack-600"}`}>
               Price
             </Th>
-            <Th className="text-left text-sm font-medium uppercase text-richblack-100">
+            <Th className={`text-left text-sm font-medium uppercase ${darkMode ? "text-richblack-100" : "text-richblack-600"}`}>
               Actions
             </Th>
           </Tr>
@@ -61,7 +63,7 @@ export default function CoursesTable({ courses, setCourses }) {
         <Tbody>
           {courses?.length === 0 ? (
             <Tr>
-              <Td className="py-10 text-center text-2xl font-medium text-richblack-100">
+              <Td className={`py-10 text-center text-2xl font-medium ${darkMode ? "text-richblack-100" : "text-richblack-600"}`}>
                 No courses found
                 {/* TODO: Need to change this state */}
               </Td>
@@ -79,10 +81,10 @@ export default function CoursesTable({ courses, setCourses }) {
                     className="h-[148px] w-[220px] rounded-lg object-cover"
                   />
                   <div className="flex flex-col justify-between">
-                    <p className="text-lg font-semibold text-richblack-5">
+                    <p className={`text-lg font-semibold ${darkMode ? "text-richblack-5" : "text-richblack-500"}`}>
                       {course.courseName}
                     </p>
-                    <p className="text-xs text-richblack-300">
+                    <p className={`text-xs ${darkMode ? "text-richblack-300" : "text-richblack-500"}`}>
                       {course.courseDescription.split(" ").length >
                       TRUNCATE_LENGTH
                         ? course.courseDescription
@@ -91,7 +93,7 @@ export default function CoursesTable({ courses, setCourses }) {
                             .join(" ") + "..."
                         : course.courseDescription}
                     </p>
-                    <p className="text-[12px] text-white">
+                    <p className={`text-[12px] ${darkMode ? "text-white" : "text-caribbeangreen-300"}`}>
                       Created: {(course.createdAt)}
                     </p>
                     {course.status === COURSE_STATUS.DRAFT ? (
@@ -109,10 +111,10 @@ export default function CoursesTable({ courses, setCourses }) {
                     )}
                   </div>
                 </Td>
-                <Td className="text-sm font-medium text-richblack-100">
+                <Td className={`text-sm font-medium ${darkMode ? "text-richblack-100" : "text-richblack-300"}`}>
                   2hr 30min
                 </Td>
-                <Td className="text-sm font-medium text-richblack-100">
+                <Td className={`text-sm font-medium ${darkMode ? "text-richblack-100" : "text-richblack-300"}`}>
                   ₹{course.price}
                 </Td>
                 <Td className="text-sm font-medium text-richblack-100 ">
@@ -122,7 +124,7 @@ export default function CoursesTable({ courses, setCourses }) {
                       navigate(`/dashboard/edit-course/${course._id}`)
                     }}
                     title="Edit"
-                    className="px-2 transition-all duration-200 hover:scale-110 hover:text-caribbeangreen-300"
+                    className={`px-2 transition-all duration-200   hover:scale-110 hover:text-caribbeangreen-300`}
                   >
                     <FiEdit2 size={20} />
                   </button>

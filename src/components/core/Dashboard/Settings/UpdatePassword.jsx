@@ -29,14 +29,16 @@ export default function UpdatePassword() {
     }
   }
 
+  const {darkMode} = useSelector((state) => state.mode);
+
   return (
     <>
       <form onSubmit={handleSubmit(submitPasswordForm)}>
-        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
-          <h2 className="text-lg font-semibold text-richblack-5">Password</h2>
+        <div className={`my-10 flex flex-col gap-y-6 rounded-md border-[1px] ${darkMode ? "border-richblack-700 bg-richblack-800" : "bg-white border-pure-greys-50 shadow-[0_3px_10px_rgb(0,0,0,0.2)]"} p-8 px-12`}>
+          <h2 className={`text-lg font-semibold ${darkMode ? "text-richblack-5" : "text-richblack-600"}`}>Password</h2>
           <div className="flex flex-col gap-5 lg:flex-row">
             <div className="relative flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="oldPassword" className="label-style">
+              <label htmlFor="oldPassword" className={`${darkMode ? "label-style" : "light-label-style"}`}>
                 Current Password
               </label>
               <input
@@ -44,7 +46,7 @@ export default function UpdatePassword() {
                 name="oldPassword"
                 id="oldPassword"
                 placeholder="Enter Current Password"
-                className="form-style"
+                className= {`${darkMode ? "form-style" : "light-form-style border-[1px] border-pure-greys-50"}`}
                 {...register("oldPassword", { required: true })}
               />
               <span
@@ -64,7 +66,7 @@ export default function UpdatePassword() {
               )}
             </div>
             <div className="relative flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="newPassword" className="label-style">
+              <label htmlFor="newPassword"  className={`${darkMode ? "label-style" : "light-label-style"}`}>
                 New Password
               </label>
               <input
@@ -72,7 +74,7 @@ export default function UpdatePassword() {
                 name="newPassword"
                 id="newPassword"
                 placeholder="Enter New Password"
-                className="form-style"
+                className= {`${darkMode ? "form-style" : "light-form-style border-[1px] border-pure-greys-50"}`}
                 {...register("newPassword", { required: true })}
               />
               <span
@@ -93,14 +95,14 @@ export default function UpdatePassword() {
             </div>
 
             <div className="relative flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="confirmNewPassword" className="label-style">
+              <label htmlFor="confirmNewPassword"  className={`${darkMode ? "label-style" : "light-label-style"}`}>
                 Confirm Password
               </label>
               <input 
                 name="confirmNewPassword"
                 id="confirmNewPassword"
                 placeholder="Confirm New Password"
-                className="form-style"
+                className= {`${darkMode ? "form-style" : "light-form-style border-[1px] border-pure-greys-50"}`}
                 {...register("confirmNewPassword", { required: true })}
               />
                
@@ -117,7 +119,7 @@ export default function UpdatePassword() {
             onClick={() => {
               navigate("/dashboard/my-profile")
             }}
-            className="cursor-pointer rounded-md bg-richblack-700 py-2 px-5 font-semibold text-richblack-50"
+            className={`cursor-pointer rounded-md py-2 px-5 font-semibold  ${darkMode ? "text-richblack-50 bg-richblack-700" : "bg-pure-greys-25 border-[1px] border-pure-greys-50 text-richblack-600"}`}
           >
             Cancel
           </button>

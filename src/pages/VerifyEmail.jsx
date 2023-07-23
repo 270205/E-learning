@@ -33,6 +33,8 @@ const VerifyEmail = () => {
         dispatch(signUp(accountType, firstName, lastName, email, password, confirmPassword, otp, navigate))
     }
 
+    const {darkMode} = useSelector((state)=>state.mode);
+
     return (
         <div className='min-h-[calc(100vh-3.5rem)] grid place-items-center'>
             {
@@ -42,8 +44,8 @@ const VerifyEmail = () => {
                     )
                     : (
                         <div className='max-w-[500px] p-4 lg:p-8'>
-                            <h1 className="text-richblack-5 font-semibold text-[1.875rem] leading-[2.375rem]">Verify Email</h1>
-                            <p className="text-[1.125rem] leading-[1.625rem] my-4 text-richblack-100">A verification code has been sent to you. Enter the code below</p>
+                            <h1 className={`font-semibold text-[1.875rem] leading-[2.375rem] ${darkMode ? "text-richblack-5" : "text-richblack-600"}`}>Verify Email</h1>
+                            <p className={`text-[1.125rem] leading-[1.625rem] my-4 ${darkMode ? "text-richblack-100" : "text-richblack-300"}`}>A verification code has been sent to you. Enter the code below</p>
                             <form onSubmit={handleOnSubmit}>
                                 <OtpInput
                                     value={otp}
@@ -56,7 +58,7 @@ const VerifyEmail = () => {
                                         style={{
                                             boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                                         }} 
-                                        className="w-[48px] lg:w-[60px] border-0 bg-richblack-800 rounded-[0.5rem] text-richblack-5 aspect-square text-center focus:border-0 focus:outline-2 focus:outline-yellow-50" 
+                                        className={` w-[48px] lg:w-[60px] border-0 bg-richblack-800 rounded-[0.5rem] text-richblack-5 aspect-square text-center focus:border-0 focus:outline-2 focus:outline-yellow-50 `}
                                     />)}
                                     containerStyle={{
                                         display: "flex",
@@ -72,7 +74,7 @@ const VerifyEmail = () => {
                             <div className='flex items-center mt-6 justify-between '>
                                 <div className='flex items-center justify-between '>
                                     <Link to="/login">
-                                        <p className='flex items-center gap-x-2 text-richblack-5'>
+                                        <p className={`flex items-center gap-x-2 ${darkMode ? "text-richblack-5" : "text-richblack-500"}`}>
                                             <BiArrowBack />
                                             Back to Login
                                         </p>

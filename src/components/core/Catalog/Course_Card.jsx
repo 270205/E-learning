@@ -4,6 +4,7 @@ import RatingStars from '../../common/RatingStars'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import GetAvgRating from '../../../utils/avgRating'
+import { useSelector } from 'react-redux'
 
 const Course_Card = ({course, Height}) => {
 
@@ -14,11 +15,13 @@ const Course_Card = ({course, Height}) => {
         setAvgReviewCount(count);
     }, [course])
 
+    const {darkMode} = useSelector((state) => state.mode);
+
   return (
     <div>
         {/* using link tag here bcz if we click on any course it will display the details of that course  */}
         <Link to={`/courses/${course._id}`}>
-            <div className='my-10 border border-richblack-800 rounded-lg '>
+            <div className={`p-5 my-10 border rounded-xl ${darkMode ? "bg-richblack-900 border-richblack-800 " : "bg-pure-greys-5 border-pure-greys-50 shadow-[0_3px_10px_rgb(0,0,0,0.2)]"}`}>
                 <div>
                     <img 
                         src={course?.thumbnail}
@@ -27,14 +30,14 @@ const Course_Card = ({course, Height}) => {
                     />
                 </div>
                 <div>
-                    <p className='text-white text-2xl m-2'>{course?.courseName}</p>
+                    <p className={`text-2xl m-2 ${darkMode ? "text-richblack-5" : "text-richblack-600"}`}>{course?.courseName}</p>
                     <p className='text-richblack-100 m-2'>{course?.instructor?.firstName} {course?.instructor?.lastName}</p>
                     <div className='flex gap-x-3 m-2'>
                         <span className='text-yellow-50'>{avgReviewCount || 0}</span>
                         <RatingStars Review_Count={avgReviewCount}/> 
-                        <span className='text-richblack-300'>{course?.ratingAndReviews?.length} Ratings</span>
+                        <span className={`${darkMode ? 'text-richblack-300' : 'text-richblack-400'}`}>{course?.ratingAndReviews?.length} Ratings</span>
                     </div>
-                    <p className='text-richblack-5 m-2'>RS {course?.price}</p>
+                    <p className={` m-2 ${darkMode ? "text-richblack-5" : "text-richblack-400"}`}>RS {course?.price}</p>
                 </div>
             </div>
         </Link>

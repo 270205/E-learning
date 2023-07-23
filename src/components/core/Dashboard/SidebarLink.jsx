@@ -1,5 +1,5 @@
 import * as Icons from "react-icons/vsc"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { NavLink, matchPath, useLocation } from "react-router-dom"
 
 // import { resetCourseState } from "../../../slices/courseSlice"
@@ -12,6 +12,8 @@ export default function SidebarLink({ link, iconName }) {
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname)
   }
+ 
+  const {darkMode} = useSelector((state) => state.mode);
 
   return (
     <NavLink
@@ -19,7 +21,7 @@ export default function SidebarLink({ link, iconName }) {
     //   onClick={() => dispatch(resetCourseState())}
       className={`relative px-8 py-2 text-sm font-medium ${
         matchRoute(link.path)
-          ? "bg-yellow-800 text-yellow-50"
+          ? `${darkMode ? "bg-yellow-800 text-yellow-50" : "bg-pure-greys-5 "}`
           : "bg-opacity-0 text-richblack-300"
       } transition-all duration-200`}
     >

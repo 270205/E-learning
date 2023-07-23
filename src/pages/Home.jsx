@@ -11,20 +11,22 @@ import InstructorSection from '../components/core/HomePage/InstructorSection';
 import ExploreMore from '../components/core/HomePage/ExploreMore';
 import Footer from '../components/common/Footer';
 import ReviewSlider from '../components/common/ReviewSlider';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
+    const {darkMode} = useSelector((state) => state.mode);
     return (
         <div>
             {/* divide page into 3 sections and a footer by page colour wise */}
 
             {/* section 1 */}
-            <div className='max-w-maxContent relative mx-auto flex flex-col w-11/12 items-center text-white justify-between '>
+            <div className='max-w-maxContent relative mx-auto flex flex-col w-11/12 items-center text-white justify-between'>
 
                 <Link to={"/signup"}>
                     {/* jub b m hover kru to parent ka colour or b dark hojaye to uske liye group ka use krenge or child me property define krenge*/}
-                    <div className='group mt-16 p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200 transition-all duration-200 hover:scale-95 w-fit shadow-[0px_1px_0px_0px_rgba(255,255,255,0.25)] hover:shadow-none'>
+                    <div className={`group mt-16 p-1 mx-auto rounded-full ${darkMode ? "bg-richblack-800 text-richblack-200" : "bg-pure-greys-25 text-richblack-400"} font-bold  transition-all duration-200 hover:scale-95 w-fit shadow-[0px_1px_0px_0px_rgba(255,255,255,0.25)] hover:shadow-none`}>
 
-                        <div className='flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-richblack-900'>
+                        <div className={`flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 ${darkMode ? "group-hover:bg-richblack-900" : "group-hover:bg-pure-greys-50"} `}>
 
                             <p>Become an Instrcutor</p>
                             <FaArrowRight />
@@ -33,7 +35,7 @@ const Home = () => {
                     </div>
                 </Link>
 
-                <div className='text-center text-4xl font-semibold mt-7'>
+                <div className={`text-center text-4xl font-semibold mt-7 ${darkMode ? "text-richblack-5":"text-richblack-600"}`}>
                     Empower Your Future With
                     <HilightText text={" Coding Skills"} />
                 </div>
@@ -171,7 +173,8 @@ const Home = () => {
                             Get the skills you need for a
                             <HilightText text={" job that is in demand."} />
                         </div>
-                        <div className='flex flex-col gap-10 lg:w-[40%] lg:items-start items-center'>
+                        {/* w-[90%] text-center text-lg font-bold text-richblack-300 mt-4 */}
+                        <div className='flex flex-col gap-10 lg:w-[40%] lg:items-start items-center text-lg font-bold text-richblack-300'>
                             <div className='text-[16px]'>
                                 The modern StudyNotion is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.
                             </div>
@@ -186,7 +189,7 @@ const Home = () => {
             </div>
 
             {/* section 3 */}
-            <div className="relative mx-auto my-20 flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 bg-richblack-900 text-white">
+            <div className={`relative mx-auto my-20 flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 ${darkMode && "bg-richblack-900 text-white"}`}>
                 {/* Become a instructor section */}
                 <InstructorSection />
 

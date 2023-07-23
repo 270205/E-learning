@@ -170,8 +170,10 @@ const VideoDetails = () => {
 
 }
 
+  const {darkMode} = useSelector((state) => state.mode);
+
   return (
-    <div className="flex flex-col gap-5 text-white mt-6">
+    <div className={`flex flex-col gap-5 mt-6 ${darkMode ? "text-white" : "text-richblack-600"}`}>
       {!videoData ? (
         <img
           src={previewSource}
@@ -221,16 +223,17 @@ const VideoDetails = () => {
                   <button
                     disabled={loading}
                     onClick={goToPrevVideo}
-                    className="blackButton"
+                    className={`${darkMode ? "blackButton" : "bg-pure-greys-50 px-5 py-2 rounded-md text-richblack-700"}`}
                   >
                     Prev
                   </button>
                 )}
+                {/* bg-pure-greys-50 */}
                 {!isLastVideo() && (
                   <button
                     disabled={loading}
                     onClick={goToNextVideo}
-                    className="blackButton"
+                    className={`${darkMode ? "blackButton" : "bg-pure-greys-50 px-5 py-2 rounded-md text-richblack-700"}`}
                   >
                     Next
                   </button>
@@ -242,7 +245,7 @@ const VideoDetails = () => {
       )}
 
       <h1 className="mt-4 text-3xl font-semibold">{videoData?.title}</h1>
-      <p className="pt-2 pb-6 text-richblack-50">{videoData?.description}</p>
+      <p className={`pt-2 pb-6 ${darkMode ? "text-richblack-50" : "text-richblack-400"}`}>{videoData?.description}</p>
     </div>
   )
 }

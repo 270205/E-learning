@@ -22,6 +22,7 @@ export default function Sidebar() {
 
     // to keep track of confirmation modal
     const [confirmationModal, setConfirmationModal] = useState(null)
+    const {darkMode } = useSelector((state) => state.mode);
 
     if (profileLoading || authLoading) {
         return (
@@ -31,18 +32,18 @@ export default function Sidebar() {
         )
     }
 
-   
+
     return (
         <>
             {
                 open ?
                 (
-                    <div className="flex h-[calc(100vh-3.5rem)] min-w-[220px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800 ">
+                    <div className={`flex h-[calc(100vh-3.5rem)] min-w-[220px] flex-col border-r-[1px]  ${darkMode ? "bg-richblack-800 border-r-richblack-700" : "bg-white border-r-pure-greys-25 "}`}>
                         <button 
                             onClick={() => setOpen(false)} 
                             className="m-2 "
                         >
-                            <IoCloseSharp className='text-richblack-5 text-2xl ml-[185px]'/>
+                            <IoCloseSharp className={`${darkMode ? "text-richblack-5" : "text-richblack-500"} text-2xl ml-[185px]`}/>
                         </button>
                         <div className="flex flex-col">
                             {sidebarLinks.map((link) => {
@@ -52,7 +53,7 @@ export default function Sidebar() {
                                 )
                             })}
                         </div>
-                        <div className="mx-auto mt-6 mb-6 h-[1px] w-10/12 bg-richblack-700" />
+                        <div className={`mx-auto mt-6 mb-6 h-[1px] w-10/12 ${darkMode ? "bg-richblack-700" : "bg-pure-greys-50"}`} />
                         <div className="flex flex-col">
                             <SidebarLink
                                 link={{ name: "Settings", path: "/dashboard/settings" }}
@@ -80,9 +81,9 @@ export default function Sidebar() {
                     </div>
                 )
                 : (
-                    <div className="bg-richblack-800 w-10 border border-r-richblack-700">
+                    <div className={`${darkMode ? "bg-richblack-800 border border-r-richblack-700" : "bg-white "} w-10 `}>
                         <button onClick={() => setOpen(true)}>
-                            <AiOutlineBars className="ml-2 mt-1 text-richblack-5 text-2xl" />
+                            <AiOutlineBars className={`ml-2 mt-1 ${darkMode ? "text-richblack-5" : "text-richblack-500"} text-2xl`} />
                         </button>
                     </div>
                 )

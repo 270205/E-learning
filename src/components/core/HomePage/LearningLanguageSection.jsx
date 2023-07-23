@@ -15,7 +15,7 @@ const LearningLanguageSection = () => {
                 <HilightText text={" Learning any Language"}/>
             </div>    
             
-            <div className='font text-center text-richblack-700 mx-auto text-base font-medium lg:w-[70%]'>
+            <div className='font text-center mx-auto text-base  lg:w-[70%] text-lg font-bold text-richblack-300'>
                 Using spin making learning multiple languages easy. with 20+ languages realistic voice-over, progress tracking, custom schedule and more.
             </div>  
  

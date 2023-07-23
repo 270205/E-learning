@@ -12,6 +12,7 @@ export default function EditProfile() {
   const { token } = useSelector((state) => state.auth)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const {darkMode} = useSelector((state) => state.mode);
 
   const {
     register,
@@ -31,13 +32,13 @@ export default function EditProfile() {
     <>
       <form onSubmit={handleSubmit(submitProfileForm)}>
         {/* Profile Information */}
-        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
-          <h2 className="text-lg font-semibold text-richblack-5">
+        <div className={`my-10 flex flex-col gap-y-6 rounded-md border-[1px] ${darkMode ? "border-richblack-700 bg-richblack-800":"border-pure-greys-50 bg-white"} p-8 px-12 shadow-[0_3px_10px_rgb(0,0,0,0.2)]`}>
+          <h2 className={`text-lg font-semibold ${darkMode ? "text-richblack-5" : "text-richblack-600"}`}>
             Profile Information
           </h2>
           <div className="flex flex-col gap-5 lg:flex-row">
             <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="firstName" className="label-style">
+              <label htmlFor="firstName" className={`${darkMode ? "label-style" : "light-label-style"}`}>
                 First Name
               </label>
               <input
@@ -45,7 +46,7 @@ export default function EditProfile() {
                 name="firstName"
                 id="firstName"
                 placeholder="Enter first name"
-                className="form-style"
+                className= {`${darkMode ? "form-style" : "light-form-style border-[1px] border-pure-greys-50"}`}
                 {...register("firstName", { required: true })}
                 defaultValue={user?.firstName}
               />
@@ -56,7 +57,7 @@ export default function EditProfile() {
               )}
             </div>
             <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="lastName" className="label-style">
+              <label htmlFor="lastName" className={`${darkMode ? "label-style" : "light-label-style"}`}>
                 Last Name
               </label>
               <input
@@ -64,7 +65,7 @@ export default function EditProfile() {
                 name="lastName"
                 id="lastName"
                 placeholder="Enter first name"
-                className="form-style"
+                className= {`${darkMode ? "form-style" : "light-form-style border-[1px] border-pure-greys-50"}`}
                 {...register("lastName", { required: true })}
                 defaultValue={user?.lastName}
               />
@@ -78,14 +79,14 @@ export default function EditProfile() {
 
           <div className="flex flex-col gap-5 lg:flex-row">
             <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="dateOfBirth" className="label-style">
+              <label htmlFor="dateOfBirth" className={`${darkMode ? "label-style" : "light-label-style"}`}>
                 Date of Birth
               </label>
               <input
                 type="date"
                 name="dateOfBirth"
                 id="dateOfBirth"
-                className="form-style"
+                className= {`${darkMode ? "form-style" : "light-form-style border-[1px] border-pure-greys-50"}`}
                 {...register("dateOfBirth", {
                   required: {
                     value: true,
@@ -105,14 +106,14 @@ export default function EditProfile() {
               )}
             </div>
             <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="gender" className="label-style">
+              <label htmlFor="gender" className={`${darkMode ? "label-style" : "light-label-style"}`}>
                 Gender
               </label>
               <select
                 type="text"
                 name="gender"
                 id="gender"
-                className="form-style"
+                className= {`${darkMode ? "form-style" : "light-form-style border-[1px] border-pure-greys-50"}`}
                 {...register("gender", { required: true })}
                 defaultValue={user?.additionalDetails?.gender}
               >
@@ -134,7 +135,7 @@ export default function EditProfile() {
 
           <div className="flex flex-col gap-5 lg:flex-row">
             <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="contactNumber" className="label-style">
+              <label htmlFor="contactNumber" className={`${darkMode ? "label-style" : "light-label-style"}`}>
                 Contact Number
               </label>
               <input
@@ -142,7 +143,7 @@ export default function EditProfile() {
                 name="contactNumber"
                 id="contactNumber"
                 placeholder="Enter Contact Number"
-                className="form-style"
+                className= {`${darkMode ? "form-style" : "light-form-style border-[1px] border-pure-greys-50"}`}
                 {...register("contactNumber", {
                   required: {
                     value: true,
@@ -160,7 +161,7 @@ export default function EditProfile() {
               )}
             </div>
             <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="about" className="label-style">
+              <label htmlFor="about" className={`${darkMode ? "label-style" : "light-label-style"}`}>
                 About
               </label>
               <input
@@ -168,7 +169,7 @@ export default function EditProfile() {
                 name="about"
                 id="about"
                 placeholder="Enter Bio Details"
-                className="form-style"
+                className= {`${darkMode ? "form-style" : "light-form-style border-[1px] border-pure-greys-50"}`}
                 {...register("about", { required: true })}
                 defaultValue={user?.additionalDetails?.about}
               />
@@ -186,7 +187,7 @@ export default function EditProfile() {
             onClick={() => {
               navigate("/dashboard/my-profile")
             }}
-            className="cursor-pointer rounded-md bg-richblack-700 py-2 px-5 font-semibold text-richblack-50"
+            className={`cursor-pointer rounded-md py-2 px-5 font-semibold  ${darkMode ? "text-richblack-50 bg-richblack-700" : "bg-pure-greys-25 border-[1px] border-pure-greys-50 text-richblack-600"}`} 
           >
             Cancel
           </button>

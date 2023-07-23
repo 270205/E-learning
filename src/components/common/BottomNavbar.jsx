@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import Logo from "../../assets/Logo/Logo-Full-Light.png"
+import Logo1 from "../../assets/Logo/Logo-Full-Dark.png"
 import { Link, matchPath } from 'react-router-dom'
 import { NavbarLinks } from "../../data/navbar-links"
 import { useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AiOutlineHome, AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai"
 import ProfileDropDown from '../core/auth/ProfileDropDown'
 import { apiConnector } from '../../services/apiconnector'
 import { categories } from '../../services/apis'
 import { GrContact } from "react-icons/gr"
-import { MdContactPhone, MdOutlineDashboardCustomize } from 'react-icons/md'
+import { MdContactPhone, MdOutlineDarkMode, MdOutlineDashboardCustomize, MdOutlineLightMode } from 'react-icons/md'
+import { setMode } from '../../slices/modeSlice'
 
 // ye backend se data fetch nhi ho rha tha to test k liye le liya hai ye data 
 // const subLinks = [
@@ -27,6 +29,7 @@ import { MdContactPhone, MdOutlineDashboardCustomize } from 'react-icons/md'
 
 
 const BottomNavbar = () => {
+    const dispatch = useDispatch();
 
     const { token } = useSelector((state) => state.auth)
     const { user } = useSelector((state) => state.profile)
@@ -35,17 +38,19 @@ const BottomNavbar = () => {
 
     //api call // this function will get all sublilnk for catalog section 
     const [loading, setLoading] = useState(false)
-     
+
     // agar current path match kr jayega to uske liye diff css proprties set krenge
     const matchRoute = (route) => {
         return matchPath({ path: route }, location.pathname);
     }
 
+    const { darkMode } = useSelector((state) => state.mode);
+
     return (
         <div className='block md:hidden lg:hidden '>
-            <div className='flex h-14 items-center  justify-between  w-full top-0 z-10 bg-richblack-900 p-5 text-richblack-5 '>
+            <div className={`flex h-14 items-center  justify-between  w-full top-0 z-10 p-5 ${darkMode ? "bg-richblack-900 text-richblack-5" : "bg-white border-b border-richblack-300 text-richblack-5"} `}>
                 <Link to="/">
-                    <img src={Logo} alt="" width={130} height={42} loading='lazy' />
+                    <img src={`${darkMode ? Logo : Logo1}`} alt="" width={130} height={42} loading='lazy' />
                 </Link>
 
                 <div className='flex gap-x-4 items-center '>
@@ -90,6 +95,24 @@ const BottomNavbar = () => {
                         // mtlb user present hai to hum usko uski profile menu dashboard jo b sb cheezein hai wo dikhaayenge 
                         token != null && <ProfileDropDown />
                     }
+
+                    <div
+                        className={`text-2xl cursor-pointer ${darkMode ? "text-richblack-100 " : "text-richblack-700 "}
+                    `}
+                        onClick={() => {
+                            dispatch(setMode(!darkMode));
+                        }}
+                    >
+                        {
+                            darkMode ?
+                                (
+                                    <MdOutlineLightMode />
+                                ) :
+                                (
+                                    <MdOutlineDarkMode />
+                                )
+                        }
+                    </div>
                 </div>
 
             </div>

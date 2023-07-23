@@ -42,14 +42,16 @@ export default function CourseReviewModal({ setReviewModal }) {
     setReviewModal(false)
   }
 
+  const {darkMode} = useSelector((state) => state.mode);
+
   return (
-    <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
-      <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-richblack-400 bg-richblack-800">
+    <div className={`fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm`}>
+      <div className={`my-10 w-11/12 max-w-[700px] rounded-lg border ${darkMode ? "border-richblack-400 bg-richblack-800" : "border-richblack-50 bg-pure-greys-5 shadow-[0_3px_10px_rgb(0,0,0,0.2)]"}`}>
         {/* Modal Header */}
-        <div className="flex items-center justify-between rounded-t-lg bg-richblack-700 p-5">
-          <p className="text-xl font-semibold text-richblack-5">Add Review</p>
+        <div className={`flex items-center justify-between rounded-t-lg p-5 ${darkMode ? "bg-richblack-700 " : "bg-pure-greys-50"}`}>
+          <p className={`text-xl font-semibold ${darkMode ? " text-richblack-5" : " text-richblack-600"}`}>Add Review</p>
           <button onClick={() => setReviewModal(false)}>
-            <RxCross2 className="text-2xl text-richblack-5" />
+            <RxCross2 className={`text-2xl ${darkMode ? " text-richblack-5" : " text-richblack-600"}`} />
           </button>
         </div>
         {/* Modal Body */}
@@ -61,15 +63,15 @@ export default function CourseReviewModal({ setReviewModal }) {
               className="aspect-square w-[50px] rounded-full object-cover"
             />
             <div className="">
-              <p className="font-semibold text-richblack-5">
+              <p className={`font-semibold ${darkMode ? " text-richblack-5" : " text-richblack-500 text-xl"}`}>
                 {user?.firstName} {user?.lastName}
               </p>
-              <p className="text-sm text-richblack-5">Posting Publicly</p>
+              <p className={`text-sm ${darkMode ? " text-richblack-5" : " text-richblack-400"}`}>Posting Publicly</p>
             </div>
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="mt-6 flex flex-col items-center"
+            className={`mt-6 flex flex-col items-center`}
           >
             <ReactStars
               count={5}
@@ -79,7 +81,7 @@ export default function CourseReviewModal({ setReviewModal }) {
             />
             <div className="flex w-11/12 flex-col space-y-2">
               <label
-                className="text-sm text-richblack-5"
+                className={`text-sm ${darkMode ? " text-richblack-5" : " text-richblack-400"}`}
                 htmlFor="courseExperience"
               >
                 Add Your Experience <sup className="text-pink-200">*</sup>
@@ -88,7 +90,7 @@ export default function CourseReviewModal({ setReviewModal }) {
                 id="courseExperience"
                 placeholder="Add Your Experience"
                 {...register("courseExperience", { required: true })}
-                className="form-style resize-x-none min-h-[130px] w-full"
+                className={`${darkMode ? "form-style" : "light-form-style shadow-[0_3px_10px_rgb(0,0,0,0.2)]"} resize-x-none min-h-[130px] w-full`}
               />
               {errors.courseExperience && (
                 <span className="ml-2 text-xs tracking-wide text-pink-200">
@@ -99,7 +101,7 @@ export default function CourseReviewModal({ setReviewModal }) {
             <div className="mt-6 flex w-11/12 justify-end gap-x-2">
               <button
                 onClick={() => setReviewModal(false)}
-                className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900`}
+                className={`flex cursor-pointer items-center gap-x-2 rounded-md ${darkMode ? "bg-richblack-300" : "bg-pure-greys-50"} py-[8px] px-[20px] font-semibold text-richblack-900`}
               >
                 Cancel
               </button>

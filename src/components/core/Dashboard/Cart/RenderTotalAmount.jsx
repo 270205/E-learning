@@ -19,14 +19,16 @@ const RenderTotalAmount = () => {
         buyCourse(token, courses, user, navigate, dispatch)
     }
 
+    const {darkMode} = useSelector((state) => state.mode);
+
   return (
-    <div className='min-w-[280px] rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6 '>
-        <p className='mb-1 text-sm font-medium text-richblack-300'>Total</p>
-        <p className='mb-6 text-3xl font-medium text-yellow-100'>₹  {total}</p>
+    <div className={`min-w-[280px] rounded-md border-[1px]  ${darkMode ? "bg-richblack-800 border-richblack-700" : "border-pure-greys-100"} p-6 `}>
+        <p className={` mb-1 text-1xl font-medium ${darkMode ? "text-richblack-300" : "text-richblack-600"} `}>Total</p>
+        <p className={`mb-6 text-3xl font-medium ${darkMode ? "text-yellow-100" : "text-richblack-500"}`}>₹  {total}</p>
         <IconBtn
             text="Buy Now "
             onclick={handleBuyCourse}
-            customClass={"w-full justify-center"}
+            customClass={"w-full justify-center "}
         />
     </div>
   )

@@ -90,20 +90,22 @@ const CourseBuilderForm = () => {
     setValue("sectionName", sectionName);
   }
 
+  const {darkMode} = useSelector((state) => state.mode);
+
   return (
-    <div className='text-white bg-richblack-800 p-6 rounded-md border-[1px] border-richblack-700'>
-      <p className='text-2xl font-semibold mb-6'>Course Builder</p>
+    <div className={`text-white ${darkMode ? "bg-richblack-800 border-richblack-700" : "bg-white border-richblack-300 shadow-[0_3px_10px_rgb(0,0,0,0.2)]"} p-6 rounded-md border-[1px] `}>
+      <p className={`text-2xl font-semibold mb-6 ${darkMode ? "text-richblack-5" : "text-richblack-600"}`}>Course Builder</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor='sectionName' className='text-sm text-richblack-5'>Section name <sup className='text-pink-200'>*</sup></label>
+          <label htmlFor='sectionName' className={`text-sm ${darkMode ? "text-richblack-5" : "text-richblack-600"}`}>Section name <sup className='text-pink-200'>*</sup></label>
           <input 
             id='sectionName'
             placeholder='Add section name'
             {...register("sectionName", {required:true})}
-            className='w-full form-style'
+            className={` w-full ${darkMode ? "form-style" : "light-form-style"}`}
           />
           {errors.sectionName && (
-            <span className='text-xs text-yellow-50'>Section Name is required *</span>
+            <span className={`text-xs ${darkMode ? 'text-yellow-50' : 'text-pink-300'}`}>Section Name is required *</span>
           )}
         </div>
         <div className='mt-5 flex w-full'>
@@ -113,7 +115,7 @@ const CourseBuilderForm = () => {
             outline={true}
             customClasses={"text-white mb-10"}
           >
-            <MdAddCircleOutline className='text-yellow-50' size={20}/>
+            <MdAddCircleOutline className={`${darkMode ? 'text-yellow-50' : 'text-yellow-50'}`} size={20}/>
 
           </IconBtn>
           {editSectionName && (

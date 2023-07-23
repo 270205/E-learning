@@ -5,9 +5,10 @@ import RenderTotalAmount from "./RenderTotalAmount"
 
 export default function Cart() {
     const {total, totalItems} = useSelector((state) => state.cart)
+    const {darkMode} = useSelector((state) => state.mode);
     return (
-        <div className="text-richblack-5">
-            <h1 className="text-4xl mb-10">Your Cart</h1>
+        <div className={`${darkMode ? "text-richblack-5" : "text-richblack-600"}`}>
+            <h1 className="text-4xl mb-10 font-semibold">Your Cart</h1>
             <p className="text-richblack-200 mb-5 border-b border-richblack-200 pb-3">{totalItems} Courses in cart</p>
             {
                 total>0 

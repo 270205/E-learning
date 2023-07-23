@@ -136,6 +136,10 @@ module.exports = {
         800: "#171717",
         900: "#141414",
       },
+      "sample": {
+        5: "#F6FFA6",
+        25: "#C5C6D0",
+      }
     },
     extend: {
       maxWidth: {

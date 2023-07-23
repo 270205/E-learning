@@ -63,9 +63,11 @@ export default function PublishCourse() {
     handleCoursePublish()
   }
 
+  const {darkMode} = useSelector((state) => state.mode);
+
   return (
-    <div className="rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6">
-      <p className="text-2xl font-semibold text-richblack-5">
+    <div className={`rounded-md border-[1px] ${darkMode ? "bg-richblack-800 border-richblack-700" : "bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] border-richblack-300"} p-6`}>
+      <p className={`text-2xl font-semibold ${darkMode ? "text-richblack-5" : "text-richblack-500"}`}>
         Publish Settings
       </p>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -90,7 +92,7 @@ export default function PublishCourse() {
             disabled={loading}
             type="button"
             onClick={goBack}
-            className="flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900"
+            className="flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-200 py-[8px] px-[20px] font-semibold text-richblack-800"
           >
             Back
           </button>

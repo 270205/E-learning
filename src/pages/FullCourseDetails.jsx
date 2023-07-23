@@ -27,6 +27,8 @@ function FullCourseDetails() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const {darkMode} = useSelector((state) => state.mode);
+
   // Getting courseId from url parameter
   const { courseId } = useParams()
   // console.log(`course id: ${courseId}`)
@@ -152,7 +154,7 @@ function FullCourseDetails() {
 
   return (
     <>
-      <div className={`relative w-full bg-richblack-800`}>
+      <div className={`relative w-full ${darkMode ? "bg-richblack-800" : "bg-white"} `}>
         {/* Hero Section */}
         <div className="mx-auto box-content px-4 lg:w-[1260px] 2xl:relative ">
           <div className="mx-auto grid min-h-[450px] max-w-maxContentTab justify-items-center py-8 lg:mx-0 lg:justify-items-start lg:py-0 xl:max-w-[810px]">
@@ -168,35 +170,35 @@ function FullCourseDetails() {
               className={`z-30 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-richblack-5`}
             >
               <div>
-                <p className="text-4xl font-bold text-richblack-5 sm:text-[42px]">
+                <p className={`text-4xl font-bold ${darkMode ? "text-richblack-5" : "text-richblack-600"} sm:text-[42px]`}>
                   {courseName}
                 </p>
               </div>
               <p className={`text-richblack-200`}>{courseDescription}</p>
               <div className="text-md flex flex-wrap items-center gap-2">
-                <span className="text-yellow-25">{avgReviewCount}</span>
+                <span className={` ${darkMode ? "text-yellow-25" : "text-richblack-600" }`}>{avgReviewCount}</span>
                 <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
-                <span>{`(${ratingAndReviews.length} reviews)`}</span>
-                <span>{`${studentsEnrolled.length} students enrolled`}</span>
+                <span className={` ${darkMode ? "text-richblack-5" : "text-richblack-600" }`}>{`(${ratingAndReviews.length} reviews)`}</span>
+                <span className={` ${darkMode ? "text-richblack-5" : "text-richblack-600" }`}>{`${studentsEnrolled.length} students enrolled`}</span>
               </div>
               <div>
-                <p className="">
+                <p className={` ${darkMode ? "text-richblack-5" : "text-richblack-600" }`}>
                   Created By {`${instructor.firstName} ${instructor.lastName}`}
                 </p>
               </div>
               <div className="flex flex-wrap gap-5 text-lg">
-                <p className="flex items-center gap-2">
+                <p className={` flex items-center gap-2 ${darkMode ? "text-richblack-5" : "text-richblack-600" }`}>
                   {" "}
                   <BiInfoCircle /> Created at {formatDate(createdAt)}
                 </p>
-                <p className="flex items-center gap-2">
+                <p className={` flex items-center gap-2 ${darkMode ? "text-richblack-5" : "text-richblack-600" }`}>
                   {" "}
                   <HiOutlineGlobeAlt /> English
                 </p>
               </div>
             </div>
-            <div className="flex w-full flex-col gap-4 border-y border-y-richblack-500 py-4 lg:hidden">
-              <p className="space-x-3 pb-4 text-3xl font-semibold text-richblack-5">
+            <div className={`flex w-full flex-col gap-4 border-y border-y-richblack-500 py-4 lg:hidden`}>
+              <p className={`space-x-3 pb-4 text-3xl font-semibold ${darkMode ? "text-richblack-5" : "text-richblack-400"}`}>
                 Rs. {price}
               </p>
               <button className='w-full py-2 rounded  bg-yellow-50'
@@ -234,9 +236,9 @@ function FullCourseDetails() {
       <div className="mx-auto box-content px-4 text-start text-richblack-5 lg:w-[1260px]">
         <div className="mx-auto max-w-maxContentTab lg:mx-0 xl:max-w-[810px]">
           {/* What will you learn section */}
-          <div className="my-8 border border-richblack-600 p-8">
-            <p className="text-3xl font-semibold">What you'll learn</p>
-            <div className="mt-5">
+          <div className={`my-8 border p-8 ${darkMode ? "border-richblack-600" : "bg-pure-greys-5 border-pure-greys-50"}`}>
+            <p className={`text-3xl font-semibold ${darkMode ? "text-richblack-5" : "text-richblack-500"}`}>What you'll learn</p>
+            <div className={` mt-5  ${darkMode ? "" : "text-richblack-300"}`}>
               <ReactMarkdown>{whatYouWillLearn}</ReactMarkdown>
             </div>
           </div>
@@ -244,20 +246,20 @@ function FullCourseDetails() {
           {/* Course Content Section */}
           <div className="max-w-[830px] ">
             <div className="flex flex-col gap-3">
-              <p className="text-[28px] font-semibold">Course Content</p>
+              <p className={`text-[28px] font-semibold ${darkMode ? "text-richblack-5" : "text-richblack-500"}`}>Course Content</p>
               <div className="flex flex-wrap justify-between gap-2">
                 <div className="flex gap-2">
-                  <span>
+                  <span className={`${darkMode ? "text-richblack-5" : "text-richblack-300"}`}>
                     {courseContent.length} {`section(s)`}
                   </span>
-                  <span>
+                  <span className={`${darkMode ? "text-richblack-5" : "text-richblack-300"}`}>
                     {totalNoOfLectures} {`lecture(s)`}
                   </span>
-                  <span>{response.data?.totalDuration} total length</span>
+                  <span className={`${darkMode ? "text-richblack-5" : "text-richblack-300"}`}>{response.data?.totalDuration} total length</span>
                 </div>
                 <div>
                   <button
-                    className="text-yellow-25"
+                    className={`${darkMode ? "text-yellow-50" : "text-richblack-500 border-b border-b-richblack-200"}`}
                     onClick={() => setIsActive([])}
                   >
                     Collapse all sections
@@ -280,7 +282,7 @@ function FullCourseDetails() {
 
             {/* Author Details */}
             <div className="mb-12 py-4">
-              <p className="text-[28px] font-semibold">Author</p>
+              <p className={` text-[28px] font-semibold ${darkMode ? "text-richblack-5" : "text-richblack-500"}`}>Author</p>
               <div className="flex items-center gap-4 py-4">
                 <img
                   src={
@@ -291,9 +293,9 @@ function FullCourseDetails() {
                   alt="Author"
                   className="h-14 w-14 rounded-full object-cover"
                 />
-                <p className="text-lg">{`${instructor.firstName} ${instructor.lastName}`}</p>
+                <p className={`text-lg  ${darkMode ? "text-richblack-5" : "text-richblack-400"}`}>{`${instructor.firstName} ${instructor.lastName}`}</p>
               </div>
-              <p className="text-richblack-50">
+              <p className={` ${darkMode ? "text-richblack-50" : "text-richblack-300"}`}>
                 {instructor?.additionalDetails?.about}
               </p>
             </div>

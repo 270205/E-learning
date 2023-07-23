@@ -32,9 +32,11 @@ import More from "./pages/More";
 
 
 function App() {
+
+  const {darkMode} = useSelector((state) => state.mode);
   const { user } = useSelector((state) => state.profile)
   return (
-    <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
+    <div className={`w-screen min-h-screen flex flex-col font-inter ${darkMode ? "bg-richblack-900 " : "bg-white"}`}>
       <Navbar />
       <SimpleBottomNavigation />
 

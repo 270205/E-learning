@@ -39,9 +39,11 @@ export default function RequirementsField({
     setRequirementsList(updatedRequirements)
   }
 
+  const {darkMode} = useSelector((state)=>state.mode);
+
   return (
     <div className="flex flex-col space-y-2">
-      <label className="text-sm text-richblack-5" htmlFor={name}>
+      <label className={`text-sm ${darkMode ? "text-richblack-5" : "text-richblack-500"}`} htmlFor={name}>
         {label} <sup className="text-pink-200">*</sup>
       </label>
       <div className="flex flex-col items-start space-y-2">
@@ -50,12 +52,12 @@ export default function RequirementsField({
           id={name}
           value={requirement}
           onChange={(e) => setRequirement(e.target.value)}
-          className="form-style w-full"
+          className={`w-full ${darkMode ? "form-style" : "light-form-style"}`}
         />
         <button
           type="button"
           onClick={handleAddRequirement}
-          className="font-semibold text-yellow-50"
+          className={`font-semibold ${darkMode ? "text-yellow-50" : "text-richblack-400"}`}
         >
           Add
         </button>
@@ -63,7 +65,7 @@ export default function RequirementsField({
       {requirementsList.length > 0 && (
         <ul className="mt-2 list-inside list-disc">
           {requirementsList.map((requirement, index) => (
-            <li key={index} className="flex items-center text-richblack-5">
+            <li key={index} className={`flex items-center ${darkMode ? "text-richblack-5" : "text-richblack-400"}`}>
               <span>{requirement}</span>
               <button
                 type="button"

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import Logo from "../../assets/Logo/Logo-Full-Light.png"
+import Logo1 from "../../assets/Logo/Logo-Full-Dark.png"
+
 import { Link, matchPath } from 'react-router-dom'
 import { NavbarLinks } from "../../data/navbar-links"
 import { useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AiOutlineShoppingCart } from "react-icons/ai"
 import ProfileDropDown from '../core/auth/ProfileDropDown'
 import { apiConnector } from '../../services/apiconnector'
 import { categories } from '../../services/apis'
 import { BsChevronDown } from "react-icons/bs"
+import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md"
+import { setMode } from '../../slices/modeSlice'
 
 // ye backend se data fetch nhi ho rha tha to test k liye le liya hai ye data 
 // const subLinks = [
@@ -27,7 +31,10 @@ const Navbar = () => {
   const { token } = useSelector((state) => state.auth)
   const { user } = useSelector((state) => state.profile)
   const { totalItems } = useSelector((state) => state.cart)
+  const { darkMode } = useSelector((state) => state.mode);
   const location = useLocation();
+
+  const dispatch = useDispatch();
 
   //api call // this function will get all sublilnk for catalog section 
   const [subLinks, setSublinks] = useState([]);
@@ -54,12 +61,12 @@ const Navbar = () => {
   }
 
   return (
-    <div className='flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 max-[765px]:hidden'>
+    <div className={`flex h-14 items-center justify-center  ${darkMode ? "border-b-richblack-700 border-b" : "border-b border-b-richblack-25"}  max-[765px]:hidden`}>
       <div className='flex w-11/12 max-w-maxContent items-center justify-between'>
 
         {/* Image Added */}
         <Link to="/">
-          <img src={Logo} alt="" width={160} height={42} loading='lazy' />
+          <img src={`${darkMode ? (Logo) : (Logo1)}`} alt="" width={160} height={42} loading='lazy' />
         </Link>
 
         {/* "Navlinks here" => data for navlinks is taken from data folder */}
@@ -73,7 +80,7 @@ const Navbar = () => {
                     // group => hover krne p proprty add krne k liye 
                     link.title === "Catalog" ? (
                       <>
-                        <div className={`relative cursor-pointer flex items-center gap-2 group ${matchRoute('/catalog/:catalogName') ? 'text-yellow-25' : "text-richblack-50"}`}>
+                        <div className={`relative cursor-pointer flex items-center gap-2 group ${matchRoute('/catalog/:catalogName') ? `${darkMode ? "text-yellow-25" : "text-yellow-50 border-b"}` : `${darkMode ? "text-richblack-50" : "text-richblack-800"}`}`}>
                           <p>{link.title}</p>
                           <BsChevronDown />
 
@@ -95,9 +102,9 @@ const Navbar = () => {
                                   </Link>
                                 ))
                               ) :
-                              (
-                                <p className="text-center">No Courses Found</p>
-                              )
+                                (
+                                  <p className="text-center">No Courses Found</p>
+                                )
                             }
                           </div>
 
@@ -106,7 +113,9 @@ const Navbar = () => {
                     ) :
                       (
                         <Link to={link?.path}>
-                          <p className={`cursor-pointer ${matchRoute(link?.path) ? "text-yellow-25" : "text-richblack-25"}`}>
+                          <p className={`cursor-pointer ${matchRoute(link?.path) ? `${darkMode ? "text-yellow-25" : "text-yellow-50 border-b" }`: 
+                          
+                          `${darkMode ? "text-richblack-25": "text-richblack-800"}`}`}>
                             {link.title}
                           </p>
                         </Link>
@@ -140,7 +149,7 @@ const Navbar = () => {
           {
             token === null && (
               <Link to="/login" >
-                <button className='text-richblack-100 border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] rounded-md'>
+                <button className={`text-richblack-100 border border-richblack-700 ${darkMode ? "bg-richblack-800" : "bg-white text-richblack-600"} px-[12px] py-[8px] rounded-md`}>
                   Login
                 </button>
               </Link>
@@ -150,7 +159,7 @@ const Navbar = () => {
           {
             token === null && (
               <Link to="/signup">
-                <button className='text-richblack-100 border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] rounded-md' >
+                <button className={`text-richblack-100 border border-richblack-700 ${darkMode ? "bg-richblack-800" : "bg-white text-richblack-600"} px-[12px] py-[8px] rounded-md`}>
                   Sign up
                 </button>
               </Link>
@@ -161,6 +170,24 @@ const Navbar = () => {
             // mtlb user present hai to hum usko uski profile menu dashboard jo b sb cheezein hai wo dikhaayenge 
             token != null && <ProfileDropDown />
           }
+
+          <div
+            className={`text-2xl cursor-pointer ${darkMode ? "text-richblack-100 " : "text-richblack-700 "}
+                    `}
+            onClick={() => {
+              dispatch(setMode(!darkMode));
+            }}
+          >
+            {
+              darkMode ?
+                (
+                  <MdOutlineLightMode />
+                ) :
+                (
+                  <MdOutlineDarkMode />
+                )
+            }
+          </div>
         </div>
 
       </div>

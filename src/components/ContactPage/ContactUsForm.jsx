@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import CountryCode from "../../data/countrycode.json"
 import { apiConnector } from "../../services/apiconnector"
 import { contactusEndpoint } from "../../services/apis"
+import { useSelector } from "react-redux"
 
 const ContactUsForm = () => {
   const [loading, setLoading] = useState(false)
@@ -13,6 +14,8 @@ const ContactUsForm = () => {
     reset,
     formState: { errors, isSubmitSuccessful },
   } = useForm()
+
+  const {darkMode} = useSelector((state) => state.mode);
 
   const submitContactForm = async (data) => {
     // console.log("Form Data - ", data)
@@ -50,7 +53,7 @@ const ContactUsForm = () => {
     >
       <div className="flex flex-col gap-5 lg:flex-row">
         <div className="flex flex-col gap-2 lg:w-[48%]">
-          <label htmlFor="firstname" className="lable-style">
+          <label htmlFor="firstname" className={`${darkMode ? "lable-style" : "light-label-style"}`}>
             First Name
           </label>
           <input
@@ -58,7 +61,7 @@ const ContactUsForm = () => {
             name="firstname"
             id="firstname"
             placeholder="Enter first name"
-            className="form-style"
+            className={`${darkMode ? "form-style" : "light-form-style border border-pure-greys-25"}`}
             {...register("firstname", { required: true })}
           />
           {errors.firstname && (
@@ -68,7 +71,7 @@ const ContactUsForm = () => {
           )}
         </div>
         <div className="flex flex-col gap-2 lg:w-[48%]">
-          <label htmlFor="lastname" className="lable-style">
+          <label htmlFor="lastname" className={`${darkMode ? "lable-style" : "light-label-style"}`}>
             Last Name
           </label>
           <input
@@ -76,14 +79,14 @@ const ContactUsForm = () => {
             name="lastname"
             id="lastname"
             placeholder="Enter last name"
-            className="form-style"
+            className={`${darkMode ? "form-style" : "light-form-style border border-pure-greys-25"}`}
             {...register("lastname")}
           />
         </div>
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="email" className="lable-style">
+        <label htmlFor="email" className={`${darkMode ? "lable-style" : "light-label-style"}`}>
           Email Address
         </label>
         <input
@@ -91,7 +94,7 @@ const ContactUsForm = () => {
           name="email"
           id="email"
           placeholder="Enter email address"
-          className="form-style"
+          className={`${darkMode ? "form-style" : "light-form-style border border-pure-greys-25"}`}
           {...register("email", { required: true })}
         />
         {errors.email && (
@@ -102,7 +105,7 @@ const ContactUsForm = () => {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="phonenumber" className="lable-style">
+        <label htmlFor="phonenumber" className={`${darkMode ? "lable-style" : "light-label-style"}`}>
           Phone Number
         </label>
 
@@ -113,7 +116,7 @@ const ContactUsForm = () => {
               name="firstname"
               id="firstname"
               placeholder="Enter first name"
-              className="form-style"
+              className={`${darkMode ? "form-style" : "light-form-style border border-pure-greys-25"}`}
               {...register("countrycode", { required: true })}
             >
               {CountryCode.map((ele, i) => {
@@ -131,7 +134,7 @@ const ContactUsForm = () => {
               name="phonenumber"
               id="phonenumber"
               placeholder="12345 67890"
-              className="form-style"
+              className={`${darkMode ? "form-style" : "light-form-style border border-pure-greys-25"}`}
               {...register("phoneNo", {
                 required: {
                   value: true,
@@ -151,7 +154,7 @@ const ContactUsForm = () => {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="message" className="lable-style">
+        <label htmlFor="message" className={`${darkMode ? "lable-style" : "light-label-style"}`}>
           Message
         </label>
         <textarea
@@ -160,7 +163,7 @@ const ContactUsForm = () => {
           cols="30"
           rows="7"
           placeholder="Enter your message here"
-          className="form-style"
+          className={`${darkMode ? "form-style" : "light-form-style border border-pure-greys-25"}`}
           {...register("message", { required: true })}
         />
         {errors.message && (

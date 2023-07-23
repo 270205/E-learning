@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Chart, registerables } from "chart.js"
 import { Pie } from "react-chartjs-2"
+import { useSelector } from "react-redux"
 
 Chart.register(...registerables)
 
@@ -47,9 +48,11 @@ export default function InstructorChart({ courses }) {
     maintainAspectRatio: false,
   }
 
+  const {darkMode} = useSelector((state) => state.mode);
+
   return (
-    <div className="flex flex-1 flex-col gap-y-4 rounded-md bg-richblack-800  p-6">
-      <p className="text-lg font-bold text-richblack-5">Visualize</p>
+    <div className={`flex flex-1 flex-col gap-y-4 rounded-md ${darkMode ? "bg-richblack-800" : "bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]"} p-6`}>
+      <p className={`text-lg font-bold ${darkMode ? "text-richblack-5" : "text-richblack-500"}`}>Visualize</p>
       <div className="space-x-4 font-semibold">
         {/* Button to switch to the "students" chart */}
         <button

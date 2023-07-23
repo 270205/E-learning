@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { useDropzone } from "react-dropzone"
 import { FiUploadCloud } from "react-icons/fi"
-// import { useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 
 import "video-react/dist/video-react.css"
 import { Player } from "video-react"
@@ -56,14 +56,16 @@ export default function Upload({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFile, setValue])
 
+  const {darkMode} = useSelector((state)=>state.mode);
+
   return (
     <div className="flex flex-col space-y-2">
-      <label className="text-sm text-richblack-5" htmlFor={name}>
+      <label className={`text-sm ${darkMode ? "text-richblack-5" : "text-richblack-600"}`} htmlFor={name}>
         {label} {!viewData && <sup className="text-pink-200">*</sup>}
       </label>
       <div
         className={`${
-          isDragActive ? "bg-richblack-600" : "bg-richblack-700"
+          isDragActive ? `${darkMode ? "bg-richblack-600" : "bg-richblack-300"}` : `${darkMode ? "bg-richblack-700" : "bg-richblack-5"}`
         } flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-richblack-500`}
       >
         {previewSource ? (

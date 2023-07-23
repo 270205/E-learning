@@ -45,9 +45,10 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
         toast.success("Link Copied to Clipboard")
     }
 
+    const {darkMode} = useSelector((state) => state.mode);
 
     return (
-        <div className='flex flex-col gap-4 rounded-md bg-richblack-700 p-4 text-richblack-5'>
+        <div className={`flex flex-col gap-4 rounded-md ${darkMode ? "bg-richblack-700  text-richblack-5" : "bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] text-richblack-800"} p-4`}>
             <img
                 src={ThumbnailImage}
                 alt='Thumbnail Image'
@@ -58,7 +59,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
             </div>
             <div className='flex flex-col gap-y-3 px-4'>
                 <button
-                    className='w-full py-2 rounded  bg-yellow-50'
+                    className={` w-full py-2 rounded ${darkMode ? "bg-yellow-50" : "bg-pure-greys-50"}`}
                     onClick={
                         user && course?.studentsEnrolled.includes(user?._id)
                             ? () => navigate("/dashboard/enrolled-courses")
@@ -73,7 +74,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
                 {
                     (!course?.studentsEnrolled.includes(user?._id)) && (
                         <button onClick={handleAddToCart}
-                            className='w-full bg-richblack-800 py-2 rounded'>
+                            className={`w-full ${darkMode ? " bg-richblack-800 " : " bg-pure-greys-5 "} py-2 rounded`}>
                             Add to Cart
                         </button>
                     )
@@ -85,7 +86,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
                 <p className='px-4 flex justify-center'>
                     30-Day Money-Back Guarantee
                 </p>
-                <p className='text-2xl text-richblack-5'>
+                <p className={`text-2xl ${darkMode ? " text-richblack-5" : " text-richblack-400"}`}>
                     This Course Includes:
                 </p>
                 <div className='flex flex-col gap-y-3'>
@@ -101,7 +102,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
             </div>
             <div>
                 <button
-                    className='mx-auto flex items-center gap-2 p-6 text-yellow-50'
+                    className={`mx-auto flex items-center gap-2 p-6 ${darkMode ? "text-yellow-50" : "text-caribbeangreen-800"}`}
                     onClick={handleShare}
                 >
                     Share

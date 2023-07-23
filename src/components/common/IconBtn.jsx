@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux"
+
 export default function IconBtn({
     text,
     onclick,
@@ -7,6 +9,9 @@ export default function IconBtn({
     customClasses,
     type,
   }) {
+
+    const {darkMode} = useSelector((state) => state.mode);
+
     return (
       <button
         disabled={disabled}

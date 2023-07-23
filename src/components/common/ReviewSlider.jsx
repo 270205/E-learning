@@ -16,6 +16,7 @@ import { Autoplay, FreeMode, Pagination } from "swiper/modules"
 // Get apiFunction and the endpoint
 import { apiConnector } from "../../services/apiconnector"
 import { ratingsEndpoints } from "../../services/apis"
+import { useSelector } from "react-redux"
 
 function ReviewSlider() {
   const [reviews, setReviews] = useState([])
@@ -32,6 +33,8 @@ function ReviewSlider() {
       }
     })()
   }, [])
+
+  const {darkMode} = useSelector((state) => state.mode);
 
   // console.log(reviews)
 
@@ -53,7 +56,7 @@ function ReviewSlider() {
           {reviews.map((review, i) => {
             return (
               <SwiperSlide key={i}>
-                <div className="flex flex-col gap-3 bg-richblack-800 p-3 text-[14px] text-richblack-25">
+                <div className={`flex flex-col gap-3  p-3 text-[14px]  ${darkMode ? "bg-richblack-800 text-richblack-25" : "bg-white border border-b-[3px] border-pure-greys-25 text-richblack-500"}`}>
                   <div className="flex items-center gap-4">
                     <img
                       src={
@@ -65,13 +68,13 @@ function ReviewSlider() {
                       className="h-9 w-9 rounded-full object-cover"
                     />
                     <div className="flex flex-col">
-                      <h1 className="font-semibold text-richblack-5">{`${review?.user?.firstName} ${review?.user?.lastName}`}</h1>
+                      <h1 className={`font-semibold ${darkMode ? "text-richblack-5" : "text-richblack-500"}`}>{`${review?.user?.firstName} ${review?.user?.lastName}`}</h1>
                       <h2 className="text-[12px] font-medium text-richblack-500">
                         {review?.course?.courseName}
                       </h2>
                     </div>
                   </div>
-                  <p className="font-medium text-richblack-25">
+                  <p className={`font-medium ${darkMode ? "text-richblack-25" : "text-richblack-200"}`}>
                     {review?.review.split(" ").length > truncateWords
                       ? `${review?.review
                           .split(" ")

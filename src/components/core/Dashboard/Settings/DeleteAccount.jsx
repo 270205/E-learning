@@ -22,11 +22,13 @@ export default function DeleteAccount() {
     }
   }
 
+  const {darkMode} = useSelector((state) => state.mode);
+
   return (
     <>
       
-      <div className="my-10 flex flex-row gap-x-5 rounded-md border-[1px] border-pink-700 bg-pink-900 p-8 px-12 items-center"> 
-          <div className="flex aspect-square h-14 w-14 items-center justify-center rounded-full bg-pink-700">
+      <div className={`my-10 flex flex-row gap-x-5 rounded-md border-[1px] p-8 px-12 items-center ${darkMode ? " border-pink-700 bg-pink-900" : " border-pink-300 shadow-[0_3px_10px_rgb(0,0,0,0.2)]"}`}> 
+        <div className="flex aspect-square h-14 w-14 items-center justify-center rounded-full bg-pink-700">
           <button
               onClick={() =>
                   setConfirmationModal({
@@ -44,7 +46,7 @@ export default function DeleteAccount() {
             </button>
           </div>
           <div className="flex flex-col space-y-2">
-            <h2 className="text-lg font-semibold text-richblack-5">
+            <h2 className={`text-lg font-semibold ${darkMode ? "text-richblack-5" : "text-pink-400"}`}>
               Delete Account
             </h2>
           </div>

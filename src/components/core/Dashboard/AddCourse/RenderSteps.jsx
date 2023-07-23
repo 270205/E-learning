@@ -24,6 +24,8 @@ export default function RenderSteps() {
     },
   ]
 
+  const {darkMode} = useSelector((state)=> state.mode);
+
   return (
     <>
       <div className="relative mb-2 flex w-full justify-center">
@@ -36,8 +38,8 @@ export default function RenderSteps() {
               <button
                 className={`grid cursor-default aspect-square w-[34px] place-items-center rounded-full border-[1px] ${
                   step === item.id
-                    ? "border-yellow-50 bg-yellow-900 text-yellow-50"
-                    : "border-richblack-700 bg-richblack-800 text-richblack-300"
+                    ? `border-yellow-50 bg-yellow-900 text-yellow-50`
+                    : `border-richblack-700 bg-richblack-800 text-richblack-300`
                 } ${step > item.id && "bg-yellow-50 text-yellow-50"}} `}
               >
                 {step > item.id ? (
@@ -71,7 +73,7 @@ export default function RenderSteps() {
               
               <p
                 className={`text-sm ${
-                  step >= item.id ? "text-richblack-5" : "text-richblack-500"
+                  step >= item.id ? `${darkMode ? "text-richblack-5" : "text-richblack-300"}` : `${darkMode ? "text-richblack-500" : "text-richblack-800"}`
                 }`}
               >
                 {item.title}

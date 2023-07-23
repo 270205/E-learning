@@ -30,16 +30,18 @@ const Instructor = () => {
         getCourseDataWithStats();
     }, [])
 
+    const {darkMode} = useSelector((state) => state.mode);
+
     const totalAmount = instructorData?.reduce((acc, curr) => acc + curr.totalAmountGenerated, 0);
     const totalStudents = instructorData?.reduce((acc, curr) => acc + curr.totalStudentsEnrolled, 0);
 
     return (
         <div>
             <div className="space-y-2 ">
-                <h1 className="text-2xl font-bold text-richblack-5">
+                <h1 className={`text-2xl font-bold ${darkMode ? "text-richblack-5" : "text-richblack-600"}`}>
                     Hi {user?.firstName} 👋
                 </h1>
-                <p className="font-medium text-richblack-200">
+                <p className={`font-medium ${darkMode ? "text-richblack-200" : "text-richblack-400"}`}>
                     Let's start something new
                 </p>
             </div>
@@ -60,36 +62,36 @@ const Instructor = () => {
                             </div>
                         )} 
                         {/* Total Statistics */}
-                        <div className="flex min-w-[250px] flex-col rounded-md bg-richblack-800 p-6">
-                            <p className="text-lg font-bold text-richblack-5">Statistics</p>
+                        <div className={`flex min-w-[250px] flex-col rounded-md ${darkMode ? "bg-richblack-800" : 'bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]'} p-6`}>
+                            <p className={`text-lg font-bold ${darkMode ? "text-richblack-5" : "text-richblack-600"}`}>Statistics</p>
                             <div className="mt-4 space-y-4">
                                 <div>
-                                    <p className="text-lg text-richblack-200">Total Courses</p>
-                                    <p className="text-3xl font-semibold text-richblack-50">
+                                    <p className={`text-lg ${darkMode ? "text-richblack-200" : "text-richblack-500"}`}>Total Courses</p>
+                                    <p className={`text-3xl font-semibold ${darkMode ? "text-richblack-50" : "text-richblack-200"}`}>
                                         {courses.length}
                                     </p>
                                 </div>
                                 <div>
-                                    <p className="text-lg text-richblack-200">Total Students</p>
-                                    <p className="text-3xl font-semibold text-richblack-50">
+                                    <p className={`text-lg ${darkMode ? "text-richblack-200" : "text-richblack-500"}`}>Total Students</p>
+                                    <p className={`text-3xl font-semibold ${darkMode ? "text-richblack-50" : "text-richblack-200"}`}>
                                         {totalStudents}
                                     </p>
                                 </div>
                                 <div>
-                                    <p className="text-lg text-richblack-200">Total Income</p>
-                                    <p className="text-3xl font-semibold text-richblack-50">
+                                    <p className={`text-lg ${darkMode ? "text-richblack-200" : "text-richblack-500"}`}>Total Income</p>
+                                    <p className={`text-3xl font-semibold ${darkMode ? "text-richblack-50" : "text-richblack-200"}`}>
                                         Rs. {totalAmount}
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="rounded-md bg-richblack-800 p-6">
+                    <div className={`rounded-md ${darkMode ? "bg-richblack-800" : "bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]"} p-6`}>
                         {/* Render 3 courses */}
                         <div className="flex items-center justify-between">
-                            <p className="text-lg font-bold text-richblack-5">Your Courses</p>
+                            <p className={` text-lg font-bold ${darkMode ? "text-richblack-5" : "text-richblack-600"} `}>Your Courses</p>
                             <Link to="/dashboard/my-courses">
-                                <p className="text-xs font-semibold text-yellow-50">View All</p>
+                                <p className={`text-xs font-semibold  ${darkMode ? "text-yellow-50" : "shadow-[0_3px_10px_rgb(0,0,0,0.2)] px-2 py-2 rounded-md text-richblack-400"}`}>View All</p>
                             </Link>
                         </div>
                         <div className="my-4 flex lg:flex-row flex-col items-start gap-6">
@@ -101,7 +103,7 @@ const Instructor = () => {
                                         className="h-[201px] w-full rounded-md object-cover"
                                     />
                                     <div className="mt-3 w-full">
-                                        <p className="text-sm font-medium text-richblack-50">
+                                        <p className={`text-sm font-medium ${darkMode ? "text-richblack-50" : "text-richblack-500"}`}>
                                             {course.courseName}
                                         </p>
                                         <div className="mt-1 flex items-center space-x-2">

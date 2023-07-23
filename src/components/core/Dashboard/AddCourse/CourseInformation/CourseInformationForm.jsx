@@ -160,21 +160,23 @@ export default function CourseInformationForm() {
     setLoading(false)
   }
 
+  const {darkMode} = useSelector((state)=>state.mode);
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6"
+      className={`space-y-8 rounded-md border-[1px]  ${darkMode ? "bg-richblack-800 border-richblack-700" : "bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] border-richblack-300"} p-6`}
     >
       {/* Course Title */}
       <div className="flex flex-col space-y-2">
-        <label className="text-sm text-richblack-5" htmlFor="courseTitle">
+        <label className={`text-sm ${darkMode ? "text-richblack-5" : "text-richblack-600"}`} htmlFor="courseTitle">
           Course Title <sup className="text-pink-200">*</sup>
         </label>
         <input
           id="courseTitle"
           placeholder="Enter Course Title"
           {...register("courseTitle", { required: true })}
-          className="form-style w-full"
+          className={` w-full ${darkMode ? "form-style" : "light-form-style"}`}
         />
         {errors.courseTitle && (
           <span className="ml-2 text-xs tracking-wide text-pink-200">
@@ -184,14 +186,14 @@ export default function CourseInformationForm() {
       </div>
       {/* Course Short Description */}
       <div className="flex flex-col space-y-2">
-        <label className="text-sm text-richblack-5" htmlFor="courseShortDesc">
+        <label className={`text-sm ${darkMode ? "text-richblack-5" : "text-richblack-600"}`} htmlFor="courseShortDesc">
           Course Short Description <sup className="text-pink-200">*</sup>
         </label>
         <textarea
           id="courseShortDesc"
           placeholder="Enter Description"
-          {...register("courseShortDesc", { required: true })}
-          className="form-style resize-x-none min-h-[130px] w-full"
+          {...register("courseShortDesc", { required: true })} 
+          className={`resize-x-none min-h-[130px] w-full ${darkMode ? "form-style" : "light-form-style"}`}
         />
         {errors.courseShortDesc && (
           <span className="ml-2 text-xs tracking-wide text-pink-200">
@@ -201,7 +203,7 @@ export default function CourseInformationForm() {
       </div>
       {/* Course Price */}
       <div className="flex flex-col space-y-2">
-        <label className="text-sm text-richblack-5" htmlFor="coursePrice">
+        <label className={`text-sm ${darkMode ? "text-richblack-5" : "text-richblack-600"}`} htmlFor="coursePrice">
           Course Price <sup className="text-pink-200">*</sup>
         </label>
         <div className="relative">
@@ -215,7 +217,7 @@ export default function CourseInformationForm() {
                 value: /^(0|[1-9]\d*)(\.\d+)?$/,
               },
             })}
-            className="form-style w-full !pl-12"
+            className={`!pl-12 w-full ${darkMode ? "form-style" : "light-form-style"}`}
           />
           <HiOutlineCurrencyRupee className="absolute left-3 top-1/2 inline-block -translate-y-1/2 text-2xl text-richblack-400" />
         </div>
@@ -227,14 +229,14 @@ export default function CourseInformationForm() {
       </div>
       {/* Course Category */}
       <div className="flex flex-col space-y-2">
-        <label className="text-sm text-richblack-5" htmlFor="courseCategory">
+        <label className={`text-sm ${darkMode ? "text-richblack-5" : "text-richblack-600"}`} htmlFor="courseCategory">
           Course Category <sup className="text-pink-200">*</sup>
         </label>
         <select
           {...register("courseCategory", { required: true })}
           defaultValue=""
           id="courseCategory"
-          className="form-style w-full"
+          className={` w-full ${darkMode ? "form-style" : "light-form-style"}`}
         >
           <option value="" disabled>
             Choose a Category
@@ -273,14 +275,14 @@ export default function CourseInformationForm() {
       />
       {/* Benefits of the course */}
       <div className="flex flex-col space-y-2">
-        <label className="text-sm text-richblack-5" htmlFor="courseBenefits">
+        <label className={`text-sm ${darkMode ? "text-richblack-5" : "text-richblack-600"}`}htmlFor="courseBenefits">
           Benefits of the course <sup className="text-pink-200">*</sup>
         </label>
         <textarea
           id="courseBenefits"
           placeholder="Enter benefits of the course"
           {...register("courseBenefits", { required: true })}
-          className="form-style resize-x-none min-h-[130px] w-full"
+          className={` resize-x-none min-h-[130px] w-full ${darkMode ? "form-style" : "light-form-style"}`}
         />
         {errors.courseBenefits && (
           <span className="ml-2 text-xs tracking-wide text-pink-200">

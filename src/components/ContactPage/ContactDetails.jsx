@@ -2,6 +2,7 @@ import React from "react"
 import * as Icon1 from "react-icons/bi"
 import * as Icon3 from "react-icons/hi2"
 import * as Icon2 from "react-icons/io5"
+import { useSelector } from "react-redux"
 
 const contactDetails = [
   {
@@ -26,8 +27,9 @@ const contactDetails = [
 ]
 
 const ContactDetails = () => {
+  const {darkMode} = useSelector((state) => state.mode);
   return (
-    <div className="flex flex-col gap-6 rounded-xl bg-richblack-800 p-4 lg:p-6">
+    <div className={`flex flex-col gap-6 rounded-xl ${darkMode ? "bg-richblack-800" : "bg-richblack-5"} p-4 lg:p-6`}>
       {contactDetails.map((ele, i) => {
         let Icon = Icon1[ele.icon] || Icon2[ele.icon] || Icon3[ele.icon]
         return (
@@ -36,8 +38,8 @@ const ContactDetails = () => {
             key={i}
           >
             <div className="flex flex-row items-center gap-3">
-              <Icon size={25} />
-              <h1 className="text-lg font-semibold text-richblack-5">
+              <Icon size={25} color="#585D69" />
+              <h1 className={`text-lg font-semibold ${darkMode ? "text-richblack-5" : "text-richblack-500"}`}>
                 {ele?.heading}
               </h1>
             </div>

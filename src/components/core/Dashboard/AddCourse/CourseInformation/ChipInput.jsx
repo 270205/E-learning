@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
 const ChipInput = ({ name, label, register, errors, setValue, getValues }) => {
     const [Tag, setTag] = useState("");
@@ -46,10 +47,12 @@ const ChipInput = ({ name, label, register, errors, setValue, getValues }) => {
         }
     }
 
+    const {darkMode} = useSelector((state) => state.mode);
+
     return (
         <div>
 
-            <label htmlFor={name} className='label-style'>{label} <sup className='text-pink-200'>*</sup></label>
+            <label htmlFor={name} className={`${darkMode ? "label-style" : "text-richblack-600"}`}>{label} <sup className='text-pink-200'>*</sup></label>
 
             <div className='flex my-2 flex-wrap'>
             {
@@ -58,7 +61,7 @@ const ChipInput = ({ name, label, register, errors, setValue, getValues }) => {
                         <div 
                             key={index}
                         >
-                            <div className='m-1 flex items-center rounded-full bg-yellow-400 px-2 py-1 text-sm text-richblack-5 '>{Tag}
+                            <div className={`m-1 flex items-center rounded-full ${darkMode ? "bg-yellow-400 text-richblack-5" : "border border-richblack-200 text-richblack-500"} px-2 py-1 text-sm `}>{Tag}
                                 <button
                                     type='button'
                                     onClick={() => handleTagRemove(index)}
@@ -82,7 +85,7 @@ const ChipInput = ({ name, label, register, errors, setValue, getValues }) => {
                     value={Tag}
                     onChange={(e) => setTag(e.target.value)}
                     onKeyPress={handleKeyPress}
-                    className='form-style w-full'
+                    className={` w-full ${darkMode ? "form-style" : "light-form-style"}`}
                     placeholder='Enter tag and press , or enter to add tag'
                 />
             </div>

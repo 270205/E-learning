@@ -54,24 +54,25 @@ const NestedView = ({ handleChangeEditSectionName }) => {
         setConfirmationModal(null);
     }
 
+    const {darkMode} = useSelector((state)=>state.mode);
 
     return (
         <div>
 
-            <div className='rounded-lg bg-richblack-700 p-6 px-8'>
+            <div className={`rounded-lg ${darkMode ? "bg-richblack-700" : "bg-white border-[1px] border-richblack-200"} p-6 px-8`}>
                 {course?.courseContent?.map((section) => (
                     <details key={section._id} open>
 
-                        <summary className='flex items-center justify-between gap-x-3 border-b-2 border-richblack-500'>
+                        <summary className='flex items-center justify-between gap-x-3 border-b-[1px] border-richblack-500'>
                             <div className='flex items-center gap-x-3'>
-                                <RxDropdownMenu className={`text-xl text-richblack-50 my-4`}/>
-                                <p className='text-richblack-50 font-semibold my-4'>{section.sectionName}</p>
+                                <RxDropdownMenu className={`text-xl ${darkMode ? "text-richblack-50" : "text-richblack-500"} my-4`}/>
+                                <p className={`${darkMode ? "text-richblack-50" : "text-richblack-500"} font-semibold my-4`}>{section.sectionName}</p>
                             </div>
                             <div className=' flex items-center gap-x-3'>
                                 <button
                                     onClick={() => handleChangeEditSectionName(section._id, section.sectionName)}
                                 >
-                                    <MdEdit className={`text-xl text-richblack-300 my-4`} />
+                                    <MdEdit className={`text-xl ${darkMode ? "text-richblack-300" : "text-caribbeangreen-300"} my-4`} />
                                 </button>
 
                                 <button
@@ -86,7 +87,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                                         })
                                     }}
                                 >
-                                    <RiDeleteBin6Line className={`text-xl text-richblack-300 my-4`} />
+                                    <RiDeleteBin6Line className={`text-xl ${darkMode ? "text-richblack-300" : "text-pink-200"} my-4`} />
                                 </button>
                                 <span className='my-4 text-richblack-300'>|</span>
                                 <AiFillCaretDown className={`text-xl text-richblack-300 my-4`} />
@@ -101,11 +102,11 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                                     <div
                                         key={data?._id}
                                         onClick={() => setViewSubSection(data)}
-                                        className='flex items-center justify-between gap-x-3 border-b-2 border-richblack-600 m-5'
+                                        className='flex items-center justify-between gap-x-3    m-5'
                                     >
                                         <div className='flex items-center gap-x-3'>
-                                            <RxDropdownMenu className={`text-xl text-richblack-50 mb-4`} />
-                                            <p className='text-richblack-50 mb-4 font-semibold'>{data.title}</p>
+                                            <RxDropdownMenu className={`text-xl ${darkMode ? "text-richblack-50" : "text-richblack-500"} mb-4`} />
+                                            <p className={`${darkMode ? "text-richblack-50" : "text-richblack-500"} mb-4 font-semibold`}>{data.title}</p>
                                         </div>
 
                                         <div
@@ -116,7 +117,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                                             <button
                                                 onClick={() => setEditSubSection({ ...data, sectionId: section._id })}
                                             >
-                                                <MdEdit className={`text-xl text-richblack-300 mb-4`} />
+                                                <MdEdit className={`text-xl ${darkMode ? "text-richblack-300 " : "text-caribbeangreen-300"} mb-4`} />
                                             </button>
                                             <button
                                                 onClick={() => setConfirmationModal({
@@ -128,7 +129,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                                                     btn2Handler: () => setConfirmationModal(null),
                                                 })}
                                             >
-                                                <RiDeleteBin6Line className={`text-xl text-richblack-300 mb-4`}/>
+                                                <RiDeleteBin6Line className={`text-xl ${darkMode ? "text-richblack-300" : "text-pink-200"} mb-4`}/>
 
                                             </button>
                                         </div>
@@ -137,7 +138,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                             }
                             <button
                                 onClick={() => setAddSubSection(section._id)}
-                                className='m-4 flex items-center gap-x-2 text-yellow-50   '
+                                className={` ${darkMode ? "text-yellow-50" : "text-richblack-300"} m-4 flex items-center gap-x-2 `}
                             >
                                 <AiOutlinePlus className='text-lg'/>
                                 <p className='font-bold '>Add Lecture</p>
