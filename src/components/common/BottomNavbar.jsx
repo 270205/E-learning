@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Logo from "../../assets/Logo/Logo-Full-Light.png"
 import Logo1 from "../../assets/Logo/Logo-Full-Dark.png"
+import LogoNew from "../../assets/Logo/LogoNew.webp"
 import { Link, matchPath } from 'react-router-dom'
 import { NavbarLinks } from "../../data/navbar-links"
 import { useLocation } from 'react-router-dom'
@@ -50,7 +51,7 @@ const BottomNavbar = () => {
         <div className='block md:hidden lg:hidden '>
             <div className={`flex h-14 items-center  justify-between  w-full top-0 z-10 p-5 ${darkMode ? "bg-richblack-900 text-richblack-5" : "bg-white border-b border-richblack-300 text-richblack-5"} `}>
                 <Link to="/">
-                    <img src={`${darkMode ? Logo : Logo1}`} alt="" width={130} height={42} loading='lazy' />
+                    <img src={`${darkMode ? LogoNew : LogoNew}`} alt="" width={130} height={42} loading='lazy' />
                 </Link>
 
                 <div className='flex gap-x-4 items-center '>
