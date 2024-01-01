@@ -8,9 +8,7 @@ const RenderTotalAmount = () => {
 
     const {totalFav, favourities} = useSelector((state) => state.favourities)
     // const { user } = useSelector((state) => state.profile);
-    // const { token } = useSelector((state) => state.auth);
-    // const navigate = useNavigate();
-    // const dispatch = useDispatch();
+    // const { token } = useSelector((state) => state.auth); 
 
     // const handleBuyCourse = () => {
     //     const courses = favourities.map((course) => course._id);
