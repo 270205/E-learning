@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Logo from "../../assets/Logo/Logo-Full-Light.png"
-import Logo1 from "../../assets/Logo/Logo-Full-Dark.png"
+import LogoNew from "../../assets/Logo/LogoNew.webp"
 
 import { Link, matchPath } from 'react-router-dom'
 import { NavbarLinks } from "../../data/navbar-links"
@@ -13,6 +12,7 @@ import { categories } from '../../services/apis'
 import { BsChevronDown } from "react-icons/bs"
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md"
 import { setMode } from '../../slices/modeSlice'
+import { FaRegHeart } from "react-icons/fa";
 
 // ye backend se data fetch nhi ho rha tha to test k liye le liya hai ye data 
 // const subLinks = [
@@ -66,7 +66,7 @@ const Navbar = () => {
 
         {/* Image Added */}
         <Link to="/">
-          <img src={`${darkMode ? (Logo) : (Logo1)}`} alt="" width={160} height={42} loading='lazy' />
+          <img src={`${darkMode ? (LogoNew) : (LogoNew)}`} alt="" width={160} height={42} loading='lazy' />
         </Link>
 
         {/* "Navlinks here" => data for navlinks is taken from data folder */}
@@ -113,9 +113,9 @@ const Navbar = () => {
                     ) :
                       (
                         <Link to={link?.path}>
-                          <p className={`cursor-pointer ${matchRoute(link?.path) ? `${darkMode ? "text-yellow-25" : "text-yellow-50 border-b" }`: 
-                          
-                          `${darkMode ? "text-richblack-25": "text-richblack-800"}`}`}>
+                          <p className={`cursor-pointer ${matchRoute(link?.path) ? `${darkMode ? "text-yellow-25" : "text-yellow-50 border-b"}` :
+
+                            `${darkMode ? "text-richblack-25" : "text-richblack-800"}`}`}>
                             {link.title}
                           </p>
                         </Link>
@@ -145,6 +145,16 @@ const Navbar = () => {
             )
           }
 
+          {
+            // user ki value kuch hogi jub hum login honge otherwise ye null hogi 
+            user && user.accountType !== "Instructor" && (
+              <Link to="/dashboard/favourities" className={'relative text-richblack-5 text-[20px]'}>
+                <FaRegHeart className='text-pink-200' />
+              </Link>
+            )
+          }
+
+          {/* dashboard/favourities */}
 
           {
             token === null && (
@@ -166,11 +176,6 @@ const Navbar = () => {
             )
           }
 
-          {
-            // mtlb user present hai to hum usko uski profile menu dashboard jo b sb cheezein hai wo dikhaayenge 
-            token != null && <ProfileDropDown />
-          }
-
           <div
             className={`text-2xl cursor-pointer ${darkMode ? "text-richblack-100 " : "text-richblack-700 "}
                     `}
@@ -188,6 +193,12 @@ const Navbar = () => {
                 )
             }
           </div>
+
+          {
+            // mtlb user present hai to hum usko uski profile menu dashboard jo b sb cheezein hai wo dikhaayenge 
+            token != null && <ProfileDropDown />
+          }
+
         </div>
 
       </div>
