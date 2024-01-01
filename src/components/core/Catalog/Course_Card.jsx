@@ -25,8 +25,6 @@ const Course_Card = ({ course, Height }) => {
             return ;
         }
         if(token){
-            console.log("I am here ")
-            toast.success("Adding to favourities");
             dispatch(addToFavourities(course));
             return;
         }
