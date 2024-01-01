@@ -13,6 +13,7 @@ import { categories } from '../../services/apis'
 import { GrContact } from "react-icons/gr"
 import { MdContactPhone, MdOutlineDarkMode, MdOutlineDashboardCustomize, MdOutlineLightMode } from 'react-icons/md'
 import { setMode } from '../../slices/modeSlice'
+import { FaRegHeart } from 'react-icons/fa'
 
 // ye backend se data fetch nhi ho rha tha to test k liye le liya hai ye data 
 // const subLinks = [
@@ -55,7 +56,7 @@ const BottomNavbar = () => {
                 </Link>
 
                 <div className='flex gap-x-4 items-center '>
-                    {
+                    {/* {
                         // user ki value kuch hogi jub hum login honge otherwise ye null hogi 
                         user && user.accountType !== "Instructor" && (
                             <Link to="/dashboard/cart" className='relative text-richblack-5 text-[20px]'>
@@ -69,8 +70,7 @@ const BottomNavbar = () => {
                                 }
                             </Link>
                         )
-                    }
-
+                    } */}
 
                     {
                         token === null && (
@@ -90,11 +90,15 @@ const BottomNavbar = () => {
                                 </button>
                             </Link>
                         )
-                    }
+                    } 
 
                     {
-                        // mtlb user present hai to hum usko uski profile menu dashboard jo b sb cheezein hai wo dikhaayenge 
-                        token != null && <ProfileDropDown />
+                        // user ki value kuch hogi jub hum login honge otherwise ye null hogi 
+                        user && user.accountType !== "Instructor" && (
+                            <Link to="/dashboard/favourities" className={'relative text-richblack-5 text-[20px]'}>
+                                <FaRegHeart className='text-pink-200' />
+                            </Link>
+                        )
                     }
 
                     <div
@@ -114,6 +118,12 @@ const BottomNavbar = () => {
                                 )
                         }
                     </div>
+
+                    {
+                        // mtlb user present hai to hum usko uski profile menu dashboard jo b sb cheezein hai wo dikhaayenge 
+                        token != null && <ProfileDropDown />
+                    }
+
                 </div>
 
             </div>
